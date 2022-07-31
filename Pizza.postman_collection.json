@@ -16,12 +16,12 @@
 					"urlencoded": [
 						{
 							"key": "username",
-							"value": "user1",
+							"value": "user7",
 							"type": "text"
 						},
 						{
 							"key": "password",
-							"value": "user1",
+							"value": "user7",
 							"type": "text"
 						}
 					]
@@ -77,12 +77,12 @@
 					"urlencoded": [
 						{
 							"key": "client_name",
-							"value": "app1",
+							"value": "app4",
 							"type": "text"
 						},
 						{
 							"key": "redirect_uri",
-							"value": "local",
+							"value": "local4",
 							"type": "text"
 						}
 					]
@@ -104,9 +104,16 @@
 		},
 		{
 			"name": "client login",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
 				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
 				"url": {
 					"raw": "http://localhost/rest/client",
 					"protocol": "http",
@@ -150,7 +157,7 @@
 					"urlencoded": [
 						{
 							"key": "client_name",
-							"value": "Admin-app",
+							"value": "AdminApp",
 							"type": "text"
 						}
 					]
@@ -204,7 +211,7 @@
 					"urlencoded": [
 						{
 							"key": "response_type",
-							"value": "{{RESPONSE_TYPE}}",
+							"value": "{{RESPONSE_TYPE_CODE}}",
 							"type": "text"
 						},
 						{
@@ -255,12 +262,12 @@
 					"urlencoded": [
 						{
 							"key": "grant_type",
-							"value": "{{GRANT_TYPE}}",
+							"value": "{{GRANT_TYPE_AUTH_CODE}}",
 							"type": "text"
 						},
 						{
 							"key": "code",
-							"value": "{{CODE}}",
+							"value": "{{AUTH_CODE}}",
 							"type": "text"
 						},
 						{
@@ -320,7 +327,7 @@
 						},
 						{
 							"key": "grant_type",
-							"value": "{{GRANT_TYPE}}",
+							"value": "{{GRANT_TYPE_REFRESH_TOKEN}}",
 							"type": "text"
 						},
 						{
@@ -406,7 +413,7 @@
 					"urlencoded": [
 						{
 							"key": "first_name",
-							"value": "Администратор",
+							"value": "Админ",
 							"type": "text"
 						},
 						{
@@ -481,7 +488,7 @@
 						{
 							"key": "avatar",
 							"type": "file",
-							"src": "/home/tomas/Загрузки/7.jpg"
+							"src": "/home/tomas/Загрузки/avatars/7.jpg"
 						}
 					]
 				},
@@ -633,7 +640,7 @@
 			},
 			{
 				"key": "accessToken",
-				"value": "6894298f9c77a5c222da7fcf672a39d4bf0885e2a7b660239dfedb226e58256e",
+				"value": "{{ACCESS_TOKEN}}",
 				"type": "string"
 			},
 			{
@@ -690,34 +697,33 @@
 			"type": "string"
 		},
 		{
-			"key": "RESPONSE_TYPE",
+			"key": "RESPONSE_TYPE_CODE",
 			"value": "code",
 			"type": "string"
 		},
 		{
-			"key": "GRANT_TYPE",
+			"key": "GRANT_TYPE_AUTH_CODE",
 			"value": "authorization_code",
-			"type": "string",
-			"disabled": true
-		},
-		{
-			"key": "CODE",
-			"value": "4F5bGTrQZDe_YzP7cENX64J5XtVjcKtS",
 			"type": "string"
 		},
 		{
-			"key": "GRANT_TYPE",
+			"key": "AUTH_CODE",
+			"value": "23p-uY4PT8yzc-cRdyz70mjP5jlNLfgD",
+			"type": "string"
+		},
+		{
+			"key": "GRANT_TYPE_REFRESH_TOKEN",
 			"value": "refresh_token",
 			"type": "string"
 		},
 		{
 			"key": "REFRESH_TOKEN",
-			"value": "pY6YP959oMIJIgxcggJ-jzHwiAAOvG6P",
+			"value": "4eM9XPyU3CgALf7d5PewLJxefRWrknZd",
 			"type": "string"
 		},
 		{
 			"key": "ACCESS_TOKEN",
-			"value": "",
+			"value": "3c392cef3d91085dfc0f4c1643412cad3ba1d17b30ae4b91b86a76e329a6f04c",
 			"type": "string"
 		}
 	]
