@@ -1,0 +1,724 @@
+{
+	"info": {
+		"_postman_id": "5ed593c7-f8b1-4869-a7e1-6b8c4614b0b0",
+		"name": "Pizza",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15900604"
+	},
+	"item": [
+		{
+			"name": "user signup",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "user1",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "user1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/rest/signup/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"rest",
+						"signup",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user login",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "http://localhost/rest/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"rest",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "client signup",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_name",
+							"value": "app1",
+							"type": "text"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "local",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/rest/signup-client/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"rest",
+						"signup-client",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "client login",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/rest/client",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"rest",
+						"client"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "client index",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/rest/client",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"rest",
+						"client"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "client update",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_name",
+							"value": "Admin-app",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/rest/client/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"rest",
+						"client",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "client delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "http://localhost/rest/client/delete",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"rest",
+						"client",
+						"delete"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "auth create auth code",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "response_type",
+							"value": "{{RESPONSE_TYPE}}",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "{{CLIENT_ID}}",
+							"type": "text"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "{{REDIRECT_URI}}",
+							"type": "text"
+						},
+						{
+							"key": "state",
+							"value": "{{STATE}}",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "username",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/rest/auth/create-auth-code",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"rest",
+						"auth",
+						"create-auth-code"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "auth create tokens",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "{{GRANT_TYPE}}",
+							"type": "text"
+						},
+						{
+							"key": "code",
+							"value": "{{CODE}}",
+							"type": "text"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "{{REDIRECT_URI}}",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "{{CLIENT_ID}}",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "{{CLIENT_SECRET}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/rest/auth/create-tokens",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"rest",
+						"auth",
+						"create-tokens"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "auth update tokens",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_id",
+							"value": "{{CLIENT_ID}}",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "{{CLIENT_SECRET}}",
+							"type": "text"
+						},
+						{
+							"key": "refresh_token",
+							"value": "{{REFRESH_TOKEN}}",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "{{GRANT_TYPE}}",
+							"type": "text"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "{{REDIRECT_URI}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/rest/auth/update-tokens",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"rest",
+						"auth",
+						"update-tokens"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user index",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/rest/user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"rest",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user view review",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "http://localhost/rest/user?expand=reviews",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"rest",
+						"user"
+					],
+					"query": [
+						{
+							"key": "expand",
+							"value": "reviews"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user update",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "first_name",
+							"value": "Администратор",
+							"type": "text"
+						},
+						{
+							"key": "date_birth",
+							"value": "19.01.1995",
+							"type": "text"
+						},
+						{
+							"key": "city",
+							"value": "Казань",
+							"type": "text"
+						},
+						{
+							"key": "phone_number",
+							"value": "79998986677",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/rest/user/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"rest",
+						"user",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/rest/user/delete",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"rest",
+						"user",
+						"delete"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user avatar",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "avatar",
+							"type": "file",
+							"src": "/home/tomas/Загрузки/7.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/rest/user/avatar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"rest",
+						"user",
+						"avatar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "review",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/rest/review",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"rest",
+						"review"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "review create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "user_id",
+							"value": "88",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "title",
+							"value": "Lorem",
+							"type": "text"
+						},
+						{
+							"key": "body",
+							"value": "Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem ",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/rest/review/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"rest",
+						"review",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "review update",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "title",
+							"value": "Ipsum",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/rest/review/update?id=18",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"rest",
+						"review",
+						"update"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "18"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "review delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/rest/review/delete?id=18",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"rest",
+						"review",
+						"delete"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "18"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "oauth2",
+		"oauth2": [
+			{
+				"key": "tokenType",
+				"value": "",
+				"type": "string"
+			},
+			{
+				"key": "accessToken",
+				"value": "6894298f9c77a5c222da7fcf672a39d4bf0885e2a7b660239dfedb226e58256e",
+				"type": "string"
+			},
+			{
+				"key": "addTokenTo",
+				"value": "header",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "CLIENT_ID",
+			"value": "5uo11TYSp3Qh3SSjH-a8sIZL-l9Ze8WM",
+			"type": "string"
+		},
+		{
+			"key": "CLIENT_SECRET",
+			"value": "Y1I30lLAvK2M071gaIz-nZ-FySAoO8Df",
+			"type": "string"
+		},
+		{
+			"key": "STATE",
+			"value": "1BQQ8JU05OB-oG6KE6skglZJbqBjFXcT",
+			"type": "string"
+		},
+		{
+			"key": "USER_ID",
+			"value": "84",
+			"type": "string"
+		},
+		{
+			"key": "REDIRECT_URI",
+			"value": "localhost",
+			"type": "string"
+		},
+		{
+			"key": "RESPONSE_TYPE",
+			"value": "code",
+			"type": "string"
+		},
+		{
+			"key": "GRANT_TYPE",
+			"value": "authorization_code",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"key": "CODE",
+			"value": "4F5bGTrQZDe_YzP7cENX64J5XtVjcKtS",
+			"type": "string"
+		},
+		{
+			"key": "GRANT_TYPE",
+			"value": "refresh_token",
+			"type": "string"
+		},
+		{
+			"key": "REFRESH_TOKEN",
+			"value": "pY6YP959oMIJIgxcggJ-jzHwiAAOvG6P",
+			"type": "string"
+		},
+		{
+			"key": "ACCESS_TOKEN",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

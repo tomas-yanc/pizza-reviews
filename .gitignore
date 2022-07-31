@@ -1,0 +1,7 @@
+.env
+/mysql/data/
+/mysql/log/
+/nginx/logs/
+/nginx/etc/
+/nginx/usr/
+
