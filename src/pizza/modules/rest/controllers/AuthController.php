@@ -9,9 +9,6 @@ use yii\web\ServerErrorHttpException;
 use yii\filters\auth\HttpBasicAuth;
 use app\modules\rest\models\Signup;
 use app\modules\rest\models\Client;
-use app\modules\rest\services\CreateAuthData;
-use app\modules\rest\interfaces\CreateAuthDataInterface;
-
 use yii\di\Container;
 
 class AuthController extends Controller
@@ -24,14 +21,6 @@ class AuthController extends Controller
     public $modelClass = 'app\modules\rest\models\Auth';
     public $findModel;
     public $user;
-
-    public $createAuthDataInterface;
-
-    public function __construct($id, $module, $config = [], CreateAuthDataInterface $createAuthDataInterface)
-    {
-        $this->createAuthDataInterface = $createAuthDataInterface;
-        parent::__construct($id, $module, $config);
-    }
 
     public function behaviors()
     {
@@ -76,16 +65,6 @@ class AuthController extends Controller
         return $client;
     }
 
-    public function getAccessToken($userId, $clientSecret, $secretKey) {
-        $accessToken = CreateAuthData::createJwt(
-            $userId, 
-            $clientSecret, 
-            $secretKey
-        );
-
-        return $accessToken;
-    }
-
     public function setGenericRequestErrors()
     {
         $response = Yii::$app->getResponse();
@@ -102,6 +81,29 @@ class AuthController extends Controller
             'status' => $response->statusCode = self::INTERVAL_SERVER_ERROR, 
         ];
         return $response->data;
+    }    
+
+    public function getAuthData()
+    {
+        $container = new Container;
+
+        $container->set('app\modules\rest\interfaces\AuthDataInterface', [
+            'class' => 'app\modules\rest\services\AuthData',
+        ]);
+
+        $authData = $container->get('app\modules\rest\interfaces\AuthDataInterface');
+
+        return $authData;
+    }
+
+    public function getTokenData($userId, $clientSecret, $secretKey) {
+        $accessToken = $this->getAuthData()->createJwt(
+            $userId, 
+            $clientSecret, 
+            $secretKey
+        );
+
+        return $accessToken;
     }
 
     public function actionCreateAuthCode()
@@ -286,7 +288,7 @@ class AuthController extends Controller
         $clientSecret = $client->client_secret;
         $secretKey = Yii::$app->getSecurity()->generateRandomString();
 
-        $accessToken = $this->getAccessToken($userId, $clientSecret, $secretKey);
+        $accessToken = $this->getTokenData($userId, $clientSecret, $secretKey);
 
         if($accessToken == null) {
             return $this->setGenericServerErrors();
