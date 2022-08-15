@@ -10,6 +10,9 @@ use yii\filters\auth\HttpBasicAuth;
 use app\modules\rest\models\Signup;
 use app\modules\rest\models\Client;
 use app\modules\rest\services\CreateAuthData;
+use app\modules\rest\interfaces\CreateAuthDataInterface;
+
+use yii\di\Container;
 
 class AuthController extends Controller
 {
@@ -21,6 +24,14 @@ class AuthController extends Controller
     public $modelClass = 'app\modules\rest\models\Auth';
     public $findModel;
     public $user;
+
+    public $createAuthDataInterface;
+
+    public function __construct($id, $module, $config = [], CreateAuthDataInterface $createAuthDataInterface)
+    {
+        $this->createAuthDataInterface = $createAuthDataInterface;
+        parent::__construct($id, $module, $config);
+    }
 
     public function behaviors()
     {
@@ -306,223 +317,4 @@ class AuthController extends Controller
 
         return $response->data;
     }
-
-
-
-
-    // public function actionCreateAuthCode()
-    // {
-    //     if(Yii::$app->request->isPost) {
-
-    //         $auth = $this->modelClass::findOne([
-    //             'client_id' => Yii::$app->request->post('client_id'),
-    //             'user_id' => $this->user->id,
-    //         ]);
-
-    //         if($auth !== null) {
-    //             $model = $auth;
-    //         } else {
-    //             $model = new $this->modelClass();
-    //         }
-
-    //         if(Yii::$app->request->post('response_type') == 'code') {
-    //             $this->authCode = Yii::$app->getSecurity()->generateRandomString();
-    //             $this->state = Yii::$app->request->post('state');
-
-    //             $model->user_id = $this->user->id;
-    //             $model->client_id = Yii::$app->request->post('client_id');
-    //             $model->auth_code = $this->authCode;
-    //         } else {
-    //             return $this->modelClass::setGenericRequestErrors();
-    //         }
-
-    //         if ($model->save()) {
-    //             Yii::$app->response->setStatusCode(201);
-    //         } elseif (!$model->hasErrors()) {
-    //             throw new ServerErrorHttpException('Failed to create the object for unknown reason.');
-    //         }
-
-    //         if($model->client_id !== null) { 
-
-    //             if($this->state !== null) { 
-    //                 $client = Client::findOne(['client_id' => Yii::$app->request->post('client_id')]); 
-
-    //                 if(Yii::$app->request->post('redirect_uri') == $client->redirect_uri) {
-    //                     $response = Yii::$app->response;
-    //                     $response->data = [
-    //                         'state' => $this->state, 
-    //                         'data' => $model,
-    //                     ];
-            
-    //                     return $response->data;
-        
-    //                 } else {
-    //                     return $this->modelClass::setGenericRequestErrors();
-    //                 }
-    //             } else {
-    //                 return $this->modelClass::setGenericRequestErrors();
-    //             }
-    //         } else {
-    //             return $this->modelClass::setGenericRequestErrors();
-    //         }
-    //     } else {
-    //         return $this->modelClass::setGenericRequestErrors();
-    //     }
-    // }
-
-    // public function actionCreateTokens()
-    // {
-    //     if(Yii::$app->request->isPost) {
-
-    //         if(Yii::$app->request->post('client_id') !== null) {
-    //             $client = Client::findOne(['client_id' => Yii::$app->request->post('client_id')]);
-
-    //             $auth = $this->modelClass::findOne([
-    //                 'client_id' => Yii::$app->request->post('client_id'), 
-    //                 'user_id' => $this->user->id
-    //             ]);
-    //         } else {
-    //             return $this->modelClass::setGenericRequestErrors();
-    //         }
-
-    //         if($client !== null) {
-
-    //             if($client->client_secret == Yii::$app->request->post('client_secret')) {
-
-    //                 if(Yii::$app->request->post('grant_type') == 'authorization_code') {
-
-    //                     if($auth->auth_code == Yii::$app->request->post('code')) {
-    //                         $auth->secret_key = Yii::$app->getSecurity()->generateRandomString();
-        
-    //                         // Создание JWT
-    //                         $headerArr = ['alg' => 'HS256', 'typ' => 'JWT'];
-    //                         $payloadArr = ['userId' => $auth->user_id, 'clientSecret' => $client->client_secret];
-                    
-    //                         if($payloadArr !== null) {
-    //                             $header = implode($headerArr);
-    //                             $payload = implode($payloadArr);
-    //                         } else {
-    //                             return $this->modelClass::setGenericServerErrors();
-    //                         }
-                    
-    //                         $secret_key = $auth->secret_key;
-    //                         $unsignedToken = base64_encode($header) . '.' . base64_encode($payload);
-    //                         $signature = hash_hmac('sha256', $unsignedToken, $secret_key);
-        
-    //                         if($signature !== null) {
-    //                             $auth->access_token = $signature;
-    //                             $auth->refresh_token = Yii::$app->getSecurity()->generateRandomString();
-    //                             $auth->tokens_create = time();
-
-    //                             $auth->save();
-
-    //                         } else {
-    //                             return $this->modelClass::setGenericServerErrors();
-    //                         }
-        
-    //                         if($client->redirect_uri == Yii::$app->request->post('redirect_uri')) {
-    //                             $response = Yii::$app->response;
-    //                             $response->data = [
-    //                                 'access_token' => $signature,
-    //                                 'refresh_token' => $auth->refresh_token,
-    //                                 'access_token_expire' => '3600*24*7',
-    //                                 'refresh_token_expire' => '3600*24*30*12',
-    //                             ];
-            
-    //                             return $response->data;
-                                
-    //                         } else {
-    //                             return $this->modelClass::setGenericRequestErrors();
-    //                         }
-    //                     } else {
-    //                         return $this->modelClass::setGenericRequestErrors();
-    //                     }
-    //                 } else {
-    //                     return $this->modelClass::setGenericRequestErrors();
-    //                 }
-    //             } else {
-    //                 return $this->modelClass::setGenericRequestErrors();
-    //             }
-    //         } else {
-    //             return $this->modelClass::setGenericRequestErrors();
-    //         }
-    //     } else {
-    //         return $this->modelClass::setGenericRequestErrors();
-    //     }
-    // }
-
-    // public function actionUpdateTokens() 
-    // {
-    //     if(Yii::$app->request->isPost) {
-    //         $client = Client::findOne(['client_id' => Yii::$app->request->post('client_id')]);
-
-    //         if($client !== null && $client->client_secret == Yii::$app->request->post('client_secret')) {
-
-    //             $auth = $this->modelClass::findOne([
-    //                 'client_id' => Yii::$app->request->post('client_id'),
-    //                 'user_id' => $this->user->id
-    //             ]);
-
-    //             if($auth !== null && $auth->refresh_token == Yii::$app->request->post('refresh_token')) {
-
-    //                 if(($auth->tokens_create + $this->modelClass::EXPIRE_ACCESS_TOKEN) < time()) {
-
-    //                     if(($auth->tokens_create + $this->modelClass::EXPIRE_REFRESH_TOKEN) > time()) {
-
-    //                         if(Yii::$app->request->post('grant_type') == 'refresh_token') {
-    //                             $auth->secret_key = Yii::$app->getSecurity()->generateRandomString();
-    //                             $auth->tokens_create = time();
-        
-    //                             // Создание JWT
-    //                             $headerArr = ['alg' => 'HS256', 'typ' => 'JWT'];
-    //                             $payloadArr = ['userId' => $auth->user_id, 'clientSecret' => $client->client_secret];
-                        
-    //                             if($payloadArr !== null) {
-    //                                 $header = implode($headerArr);
-    //                                 $payload = implode($payloadArr);
-    //                             } else {
-    //                                 return $this->modelClass::setGenericServerErrors();
-    //                             }
-                        
-    //                             $secret_key = $auth->secret_key;
-    //                             $unsignedToken = base64_encode($header) . '.' . base64_encode($payload);
-    //                             $signature = hash_hmac('sha256', $unsignedToken, $secret_key);
-        
-    //                             if($signature !== null) {
-    //                                 $auth->access_token = $signature;
-    //                                 $auth->refresh_token = Yii::$app->getSecurity()->generateRandomString();
-    //                                 $auth->save();
-    //                             } else {
-    //                                 return $this->modelClass::setGenericServerErrors();
-    //                             }
-            
-    //                             if($client->redirect_uri == Yii::$app->request->post('redirect_uri')) {
-    //                                 $response = Yii::$app->response;
-    //                                 $response->data = [
-    //                                     'access_token' => $signature,
-    //                                     'refresh_token' => $auth->refresh_token,
-    //                                     'access_token_expire' => '3600*24*7',
-    //                                     'refresh_token_expire' => '3600*24*30*12',
-    //                                 ];
-        
-    //                                 return $response->data;
-        
-    //                             } else {
-    //                                 return $this->modelClass::setGenericRequestErrors();
-    //                             }
-    //                         } else {
-    //                             return $this->modelClass::setGenericRequestErrors();
-    //                         }
-    //                     } else {
-    //                         return 'Refresh token is die.';
-    //                     }
-    //                 } else {
-    //                     return 'Access Token still life.';
-    //                 }
-    //             } else {
-    //                 return $this->modelClass::setGenericRequestErrors();
-    //             }
-    //         }
-    //     }
-    // }
 }

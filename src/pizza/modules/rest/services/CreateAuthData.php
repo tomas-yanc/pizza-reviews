@@ -2,7 +2,10 @@
 
 namespace app\modules\rest\services;
 
-class CreateAuthData
+use app\modules\rest\interfaces\CreateAuthDataInterface;
+
+
+class CreateAuthData implements CreateAuthDataInterface
 {
     public static function createJwt($userId, $clientSecret, $secretKey)
     {
