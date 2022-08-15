@@ -2,12 +2,12 @@
 
 namespace app\modules\rest\services;
 
-use app\modules\rest\interfaces\CreateAuthDataInterface;
+use app\modules\rest\interfaces\AuthDataInterface;
 
 
-class CreateAuthData implements CreateAuthDataInterface
+class AuthData implements AuthDataInterface
 {
-    public static function createJwt($userId, $clientSecret, $secretKey)
+    public function createJwt($userId, $clientSecret, $secretKey)
     {
         $headerArr = ['alg' => 'HS256', 'typ' => 'JWT'];
         $payloadArr = ['userId' => $userId, 'clientSecret' => $clientSecret];

@@ -18,9 +18,9 @@ created_at и updated_at заполняются с помощью поведен
 Добавлен AccessControl поведение во все контроллеры админки для всех действий- зайти может только аутент польз. <br> 
 Админ не может редактировать и удалять никакие данные пользователей. <br> 
 Даже при редактировании id в url на любое действие может зайти только владелец. <br> 
-<br><br>
-APIDOC <br> 
-<br><br>
+<br>
+APIDOC
+<br>
 Создание(регистрация)пользователя                  POST http://localhost/rest/signup/create              No Auth <br> 
 Аутентификация пользователя                        GET http://localhost/rest/login                       Basic Auth <br> 
 Создание(регистрация) клиента(приложение)          POST http://localhost/rest/signup-client/create       No Auth <br> 
